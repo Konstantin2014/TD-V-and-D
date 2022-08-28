@@ -11,6 +11,8 @@ const modals = () => {
 
     const windows = document.querySelectorAll("[data-modal]"); // для получения все хмодальных окон чтобы их впоследствии закрыть
 
+    const scroll = calcScroll();
+
     trigger.forEach((item) => {
       // forEach т к использовался querySelectorAll
       item.addEventListener("click", (e) => {
@@ -25,6 +27,7 @@ const modals = () => {
 
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
+        document.body.style.marginRight = `${scroll}px`;
         // document.body.classList.add('modal-open');
       });
     });
@@ -36,6 +39,7 @@ const modals = () => {
 
       modal.style.display = "none";
       document.body.style.overflow = "";
+      document.body.style.marginRight = `0px`;
       // document.body.classList.remove('modal-open');
     });
 
@@ -48,6 +52,7 @@ const modals = () => {
 
         modal.style.display = "none";
         document.body.style.overflow = "";
+        document.body.style.marginRight = `0px`;
         // document.body.classList.remove('modal-open');
       }
     });
@@ -58,6 +63,23 @@ const modals = () => {
       document.querySelector(selector).style.display = "block";
       document.body.style.overflow = "hidden";
     }, time);
+  }
+
+  function calcScroll() {
+    // ф-ция подсчитывающая растояния скрола в px чтобы убрать скачки при появлении модалки
+    let div = document.createElement("div"); // создаем блок
+
+    div.style.width = "50px";
+    div.style.height = "50px";
+    div.style.overflowY = "scroll";
+    div.style.visibility = "hidden";
+
+    document.body.appendChild(div);
+    let scrollWidth = div.offsetWidth - div.clientWidth; // offsetWidth это полная ширина минус clientWidth,
+    // включающая padding? content и не включается прокрутка и в результате получаем ширину самой прокрутки
+    div.remove();
+
+    return scrollWidth; // возвращаем полученное значение ширины скрола
   }
 
   bindModal(
