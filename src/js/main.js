@@ -4,6 +4,7 @@ import tabs from "./modules/tabs";
 import forms from "./modules/forms";
 import changeModalState from "./modules/changeModalState";
 import timer from "./modules/timer";
+import images from "./modules/images";
 
 window.addEventListener("DOMContentLoaded", () => {
   //глобальный обработчик событий
@@ -12,7 +13,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // где пользователь что-то выбирает. этот обьект постоянно модифицируется при
   // помощи changeModalState
 
-  let deadline = "2023-02-02";
+  let deadline = "2023-02-24";
 
   changeModalState(modalState); //  валидация инпутов
 
@@ -38,4 +39,6 @@ window.addEventListener("DOMContentLoaded", () => {
   // которые ввел пользователь на странице
 
   timer(".container1", deadline);
+
+  images();
 });
